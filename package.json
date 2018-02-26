@@ -1,0 +1,30 @@
+{
+  "name": "zerotohero",
+  "version": "1.0.0",
+  "description": "udemycourse",
+  "main": "app.js",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gregsmith446/Udemy-Mean-Hotel.git"
+  },
+  "keywords": [
+    "node",
+    "express",
+    "angular",
+    "mongodb"
+  ],
+  "author": "Greg Smith",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gregsmith446/Udemy-Mean-Hotel/issues"
+  },
+  "homepage": "https://github.com/gregsmith446/Udemy-Mean-Hotel#readme"
+}
