@@ -9,6 +9,7 @@ var routes = require('./api/routes');
 app.set('port', process.env.PORT); //process.env.PORT is for cloud9, instead of 3000 in video
 
 // test middleware displays our methods and URL in terminal when they run
+// example GET, and the URL
 app.use(function (req, res, next) {
     console.log(req.method, req.url);
     next();
