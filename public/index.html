@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html ng-app="meanhotel" lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,8 +9,11 @@
     <title>MEAN Hotel</title>
 </head>
 <body>
-    
-    <h1>MEAN Hotel Homepage</h1>
+
+<!-- everytime the route updates in the browser, the content of the templates will be loaded into the ng-view div 
+by the ng-view directive -->
+
+<div ng-view></div>
     
 <footer class="footer">
     <div class="container">
@@ -23,8 +26,16 @@
         </p>
     </div>    
 </footer>
-    
     <script src="jquery/jquery3.3.1.min.js"></script>
-    
+    <script src="angular.min.js"></script>
+    <script src="node_modules/angular-route/angular-route.js"></script>
+    <script src="angular-app/app.js"></script>
+    <script src="angular-app/hotel-list/hotel-list-controller.js"></script>
+    <script src="angular-app/hotel-display/hotel-display-controller.js"></script>
+    <script src="angular-app/hotel-data-factory/hotel-data-factory.js"></script>
+    <script src="angular-app/hotel-rating/hotel-rating-directive.js"></script>
+    <!--Don't need to specify public/ for the angular app folder bc it is already specified in app.js -->
 </body>
 </html>
+
+

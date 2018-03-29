@@ -4,7 +4,7 @@ var Hotel = mongoose.model('Hotel'); //require the Hotel DB in mongo via mongoos
 // GET all reviews for a hotel, by ID (subdocument)
 module.exports.reviewsGetAll = function(req, res) {
     var id = req.params.hotelId;
-    console.log("GET hotelId", id);
+    console.log("GET all reviews for hotelId", id); //tells us reviews have been GET and the id of the hotel
     
     Hotel
         .findById(id) //find the specified hotel (from the params sent)
@@ -14,11 +14,11 @@ module.exports.reviewsGetAll = function(req, res) {
                 status : 200,
                 message : []
             }; 
-            if (err) {
+            if (err) {  //if there is an error
                 console.log("Error finding hotel");
                 response.status = 500;
                 response.message = err;
-            } else if(!doc) {
+            } else if(!doc) { //if there is not a hotel by that ID
                 response.status = 404;
                 response.message = {
                     "message" : "Hotel ID not found " + id
@@ -87,15 +87,15 @@ var _addReview = function(req, res, hotel) { //pushing our review array into the
                 .json(err);
         } else {
             res
-                .status(201)
-                .json(hotelUpdated.reviews(hotelUpdated.reviews.length - 1));
+                .status(200)
+                .json(hotelUpdated.reviews[hotelUpdated.reviews.length - 1]);
         }   
     });
 };
 
 module.exports.reviewsAddOne = function(req, res) {
     var id = req.params.hotelId;
-    console.log("GET hotelId", id);
+    console.log("POST review to hotelId", id);
     
     Hotel
         .findById(id) //find the specified hotel (from the params sent)
@@ -146,10 +146,10 @@ module.exports.reviewsUpdateOne = function(req, res) {
         response.status = 500;
         response.message = err;
       } else if (!hotel) {
-        console.log("Hotel id not found in database", id);
+        console.log("Hotel id not found in database", hotelId);
         response.status = 404;
         response.message = {
-          "message" : "Hotel ID not found " + id
+          "message" : "Hotel ID not found " + hotelId
         };
       } else {
         // Get the review

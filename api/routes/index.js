@@ -1,16 +1,19 @@
 var express = require('express');
 var router = express.Router();
 
-var ctrlHotels = require('../controllers/hotels.controller.js')
+var ctrlHotels = require('../controllers/hotels.controllers.js')
 var ctrlReviews = require('../controllers/reviews.controllers.js')
 
 
 //hotel routes
+
+//all the hotel data
 router
     .route('/hotels')
     .get(ctrlHotels.hotelsGetAll)
     .post(ctrlHotels.hotelsAddOne);
 
+//one hotel by ID
 router
     .route('/hotels/:hotelId')
     .get(ctrlHotels.hotelsGetOne)
@@ -18,20 +21,20 @@ router
     .delete(ctrlHotels.hotelsDeleteOne);
 
 
-//review routes
+//reviews routes
 
-//works
+//route to reviews for given hotelID
 router
     .route('/hotels/:hotelId/reviews')
     .get(ctrlReviews.reviewsGetAll)
-    .post(ctrlHotels.reviewsAddOne);
+    .post(ctrlReviews.reviewsAddOne);
 
-//throws an ECONNreset - unhandled error request
+//route for reviews for a hotel by ID
 router
     .route('/hotels/:hotelId/reviews/:reviewId')
     .get(ctrlReviews.reviewsGetOne)
     .put(ctrlReviews.reviewsUpdateOne)
-    .delete(ctrlHotels.reviewsDeleteOne);
+    .delete(ctrlReviews.reviewsDeleteOne);
 
 
 module.exports = router;
