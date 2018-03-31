@@ -1,9 +1,9 @@
-/* global angular HotelController $routeParams */ 
+/* global angular HotelController $route */ 
 
 angular.module('meanhotel').controller('HotelController', HotelController);
 
 
-function HotelController($http, hotelDataFactory) {
+function HotelController($http, $routeParams, $window, hotelDataFactory, AuthFactory, jwtHelper) {
     var vm = this;
     var id = $routeParams.id;
     hotelDataFactory.hotelDisplay(id).then(function(response) {
@@ -13,10 +13,22 @@ function HotelController($http, hotelDataFactory) {
     
     function _getStarRating(stars) {
         return new Array(stars);
-        
     }
+    
+    vm.isLoggedIn = function() {
+        if (AuthFactory.isloggedIn) {
+            return true;
+        } else {
+            return false;
+        }
+    };
 
     vm.addReview = function() {
+        //part of removing the empty name box for logged in users.Reviews now post with the 
+        //name of the logged in user.
+        var token = jwtHelper.decodeToken($window.sessionStorage.token);
+        var username = token.username;
+        
         var postData = {
         name: vm.name,
         rating: vm.rating,

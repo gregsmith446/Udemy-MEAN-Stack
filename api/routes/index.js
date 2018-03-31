@@ -1,17 +1,18 @@
 var express = require('express');
 var router = express.Router();
 
-var ctrlHotels = require('../controllers/hotels.controllers.js')
-var ctrlReviews = require('../controllers/reviews.controllers.js')
-
+var ctrlHotels = require('../controllers/hotels.controllers.js');
+var ctrlReviews = require('../controllers/reviews.controllers.js');
+var ctrlUsers = require('../controllers/users.controllers.js');
 
 //hotel routes
 
 //all the hotel data
 router
     .route('/hotels')
-    .get(ctrlHotels.hotelsGetAll)
+    .get(ctrlUsers.authenticate, ctrlHotels.hotelsGetAll)
     .post(ctrlHotels.hotelsAddOne);
+    
 
 //one hotel by ID
 router
@@ -27,7 +28,7 @@ router
 router
     .route('/hotels/:hotelId/reviews')
     .get(ctrlReviews.reviewsGetAll)
-    .post(ctrlReviews.reviewsAddOne);
+    .post(ctrlUsers.authenticate, ctrlReviews.reviewsAddOne);
 
 //route for reviews for a hotel by ID
 router
@@ -35,6 +36,14 @@ router
     .get(ctrlReviews.reviewsGetOne)
     .put(ctrlReviews.reviewsUpdateOne)
     .delete(ctrlReviews.reviewsDeleteOne);
+    
+// user register + login routers
+router
+    .route('/users/register')
+    .post(ctrlUsers.register);
 
+router
+    .route('/users/login')
+    .post(ctrlUsers.login);
 
 module.exports = router;
